@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="input">
+        <h1>Take a Quiz Test</h1>
+        <div class="question-amount input">
+            <label>Number of Questions:</label>
+            <input type="number" name="question-count" value="10" id="" max="50">
+        </div>
+        <div class="category input">
+            <label>Select Category:</label>
+            <select name="category" id="category"></select>
+        </div>
+        <div class="difficulty input">
+            <label>Select Difficulty:</label>
+            <select name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button id="start-btn" class="btn-design">Start</button>
+    </section>
+    <section id="test-container">
+        <h1>Complete your test below</h1>
+        <div id="test-questions">
+
+        </div>
+        <button id="submit-btn" class="btn-design">Submit</button>
+    </section>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

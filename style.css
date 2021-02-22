@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #E4E6EB;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    color: #717AEF;
+    font-size: 45px;
+    margin: 2rem 0;
+}
+select, input{
+    height: 2.5rem;
+    width: 100%;
+    font-size:16px;
+    padding: 0 0 0 20px;
+    color: #717AEF;
+    border: 0;
+    outline: 0;
+    margin: .5rem 0 1.5rem 0;
+}
+#input, #test{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+}
+.input{
+    width: 100%;
+    overflow: hidden;
+    color: #717AEF;
+}
+.btn-design{
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    color: #ffffff;
+    background: #717AEF;
+    font-size: 15px;
+    font-weight:600;
+    padding: .7rem 2rem;
+    border: 2px solid #717AEF;
+    text-transform: uppercase;
+    margin: 1rem 0;
+}
+.btn-design:hover{
+    color: #717AEF;
+    background:#E4E6EB;
+    transition: all .5s;
+}
+#test-container{
+    margin: 1rem;
+    text-align: center;
+}
+.single-question h3{
+    color: #717AEF;
+}
+.single-question{
+    max-width: 800px;
+    margin: 1.5rem auto;
+}
+.question{
+    text-align: center;
+    position: relative;
+    margin: 5rem 0 2rem 0;
+}
+.question h3{
+    background: #E4E6EB;
+    font-size: 1.4rem;
+    color: #717AEF;
+    border: 2px solid #717AEF;
+    padding:3rem 1rem;
+    border-radius: 5px;
+}
+.options{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:1rem;
+}
+.question-count{
+    text-align: center;
+    color: #E4E6EB;
+    background: #717AEF;
+    border-radius: 30px;
+    padding: 1rem 1.5rem;
+    margin-top: 10px;
+    position: absolute;
+    width: 150px;
+    left: 0;
+    right: 0;
+    top: -25px;
+    margin:0 auto;
+}
+
+input[type=radio] {
+  display: none;
+}
+input[type="radio"]:checked + label {
+  background-color: #717AEF;
+  color: #E4E6EB;
+}
+.options label {
+  display: block;
+  appearance: button;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  -ms-appearance: button;
+  font-weight: 400;
+  background: #E4E6EB;
+  font-size: 1.4rem;
+  color: #717AEF;
+  border: 2px solid #717AEF;
+  padding: 8px 0;
+  border-radius: 5px;
+  /* width: 95%; */
+  /* margin: 1rem 0; */
+  text-align: center;
+}
