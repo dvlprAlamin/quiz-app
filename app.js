@@ -7,6 +7,7 @@ const category = document.querySelector('[name="category"]');
 
 const startBtn = document.getElementById('start-btn');
 const submitBtn = document.getElementById('submit-btn');
+const backBtn = document.getElementById('back-btn');
 const input = document.getElementById('input');
 const testContainer = document.getElementById('test-container')
 const testQuestions = document.getElementById('test-questions')
@@ -64,15 +65,16 @@ const displayQuestion = (data) => {
         </div>
         `
     });
-    testQuestions.innerHTML +=`
-    <button id="back-btn" onclick="clearData()" class="btn-design">Back</button>
+    // testQuestions.innerHTML +=`
+    // <button id="back-btn" onclick="clearData()" class="btn-design">Back</button>
 
-    `
+    // `
 };
 
 // display result 
 const displayResult = (data) =>{
     submitBtn.addEventListener('click', () => {
+        submitBtnToggler();
         let marks = 0;
         let notChecked = 0;
         data.forEach((question, i) => {
@@ -98,10 +100,19 @@ const questionToggler = () => testContainer.classList.toggle('d-none');
 
 const inputToggler = () => input.classList.toggle('d-none');
 
-const submitBtnToggler = () => submitBtn.classList.toggle('d-none');
+const submitBtnToggler = () => {
+    submitBtn.classList.add('d-none');
+    backBtn.classList.remove('d-none');
+}
+const submitBtnToggle = () => {
+    submitBtn.classList.remove('d-none');
+    backBtn.classList.add('d-none');
+}
 
 const clearData = () => {
     questionToggler();
     inputToggler();
     testQuestions.innerHTML = '';
 }
+
+backBtn.addEventListener('click', submitBtnToggle)
