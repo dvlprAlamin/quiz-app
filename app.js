@@ -122,6 +122,57 @@ const clearData = () => {
     inputToggler();
     testQuestions.innerHTML = '';
     document.getElementById('marks').classList.add('d-none');
+    watch.classList.add('d-none');
 }
 
 backBtn.addEventListener('click', backBtnToggler)
+
+// watch part script
+const minutes = document.getElementById('minutes');
+const seconds = document.getElementById('seconds');
+const centiSeconds = document.getElementById('centi-seconds');
+const watch = document.getElementById('watch');
+const timeUp = document.querySelector('[timeUp]')
+const watchTime = document.querySelector('[watch-time]')
+
+// set time 
+const setTimer = () => {
+    const totalSeconds = questionCount.value * 30;
+    minutes.innerText = Math.floor(totalSeconds / 60);
+    seconds.innerText = totalSeconds % 60;
+    centiSeconds.innerText = '00';
+    timeUp.classList.add('d-none');
+    watchTime.classList.remove('d-none');
+}
+
+// unit resetter
+const resetUnit = (unit, limit, after) => unit.innerText === limit && ((unit.innerText = after) && unit.previousElementSibling.innerText--);
+// two digit updater
+const isTwoDigit = unit => unit.innerText.length === 1 && (unit.innerText = '0' + unit.innerText);
+
+// start button event handler
+startBtn.addEventListener('click', () => {
+    setTimer();
+    watch.classList.remove('d-none');
+    const interval = setInterval(() => {
+        if(seconds.innerText === '30' && minutes.innerText === '00'){
+            watchTime.classList.add('end-soon');
+        }
+        if(seconds.innerText === '00' && minutes.innerText === '00'){
+            timeUp.classList.remove('d-none');
+            watchTime.classList.add('d-none');
+            clearInterval(interval);
+            submitBtn.click();
+        }
+        // submitBtn.click() && clearInterval(interval);
+        centiSeconds.innerText++;
+        resetUnit(centiSeconds,'100', '00')
+        resetUnit(seconds,'-1', '59')
+        resetUnit(minutes,'-1', '59')
+        isTwoDigit(centiSeconds);
+        isTwoDigit(seconds);
+        isTwoDigit(minutes);
+    }, 10);
+    
+});
+// submitBtn.addEventListener('click', clearInterval(interval));

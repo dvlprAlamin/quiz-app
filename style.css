@@ -149,8 +149,45 @@ input[type="radio"]:checked + label {
 }
 
 
+/* watch part css */
+#watch{
+    width: 200px;
+    height: 65px;
+    position: fixed;
+    top:90px;
+    right:22vw;
+    border: 2px solid #717AEF;
+    border-radius: 5px;
+    background: #E4E6EB;
+}
+#watch h1{
+    font-size:35px;
+    margin: 10px 15px;
+    color: #717AEF;
+    font-weight: 700;
+}
+.end-soon{
+    color: red !important;
+    animation: zoom 1.5s alternate infinite ease-in;
+}
+@keyframes zoom {
+    0%   {transform: scale(.8);}
+    100% {transform: scale(1.2);}
+  }
+
+
+/* responsive part */
 @media (max-width: 600px){
     .options{
         grid-template-columns: 1fr;
     }
+    h1{
+        font-size: 35px;
+        margin: 2rem 0;
+    }
+    .question h3{
+        font-size: 1.2rem;
+        padding:3rem .5rem;
+    }
 }
+
