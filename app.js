@@ -9,8 +9,13 @@ const startBtn = document.getElementById('start-btn');
 const submitBtn = document.getElementById('submit-btn');
 const backBtn = document.getElementById('back-btn');
 const input = document.getElementById('input');
-const testContainer = document.getElementById('test-container')
-const testQuestions = document.getElementById('test-questions')
+const testContainer = document.getElementById('test-container');
+const testQuestions = document.getElementById('test-questions');
+
+const marks = document.getElementById('marks');
+const marksGain = document.getElementById('marks-gain');
+const totalMarks = document.getElementById('total-marks');
+
 const updateCategory = () => {
     fetch('https://opentdb.com/api_category.php')
     .then(res => res.json())
@@ -64,6 +69,7 @@ const displayQuestion = (data) => {
             </div>
         </div>
         `
+        // options.forEach((option, optNum) => document.querySelector(`#${i}o${optNum + 1}`).value = options[optNum])
     });
     // testQuestions.innerHTML +=`
     // <button id="back-btn" onclick="clearData()" class="btn-design">Back</button>
@@ -93,6 +99,9 @@ const displayResult = (data) =>{
                 rightAnswer === null || rightAnswer.nextElementSibling.classList.add('right-answer')
             }
         });
+        marksGain.textContent = marks;
+        totalMarks.textContent = data.length;
+        console.log(marks,data.length);
     });
 };
 
@@ -104,7 +113,7 @@ const submitBtnToggler = () => {
     submitBtn.classList.add('d-none');
     backBtn.classList.remove('d-none');
 }
-const submitBtnToggle = () => {
+const backBtnToggler = () => {
     submitBtn.classList.remove('d-none');
     backBtn.classList.add('d-none');
 }
@@ -115,4 +124,4 @@ const clearData = () => {
     testQuestions.innerHTML = '';
 }
 
-backBtn.addEventListener('click', submitBtnToggle)
+backBtn.addEventListener('click', backBtnToggler)
