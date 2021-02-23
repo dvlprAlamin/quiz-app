@@ -131,7 +131,9 @@ input[type="radio"]:checked + label {
     background-color: green !important;
     color: #ffffff !important;
 }
-
+.d-none{
+    display: none !important;
+}
 
 
 @media (max-width: 600px){

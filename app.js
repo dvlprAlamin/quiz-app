@@ -1,4 +1,5 @@
 
+
 const categories = document.getElementById('category');
 const questionCount = document.querySelector('[name="question-count"]');
 const difficulty = document.querySelector('[name="difficulty"]');
@@ -6,6 +7,7 @@ const category = document.querySelector('[name="category"]');
 
 const startBtn = document.getElementById('start-btn');
 const submitBtn = document.getElementById('submit-btn');
+const input = document.getElementById('input');
 const testContainer = document.getElementById('test-container')
 const testQuestions = document.getElementById('test-questions')
 const updateCategory = () => {
@@ -28,11 +30,16 @@ const fetchQuestion = () => {
     })
 }
 
-startBtn.addEventListener('click', fetchQuestion);
+startBtn.addEventListener('click', () => {
+    inputToggler();
+    // displayToggler();
+    fetchQuestion();
+});
 
 
+// display Questions
 const displayQuestion = (data) => {
-
+    questionToggler();
     data.forEach((item, i) => {
         i++;
         const options = item.incorrect_answers;
@@ -57,9 +64,13 @@ const displayQuestion = (data) => {
         </div>
         `
     });
+    testQuestions.innerHTML +=`
+    <button id="back-btn" onclick="clearData()" class="btn-design">Back</button>
+
+    `
 };
 
-
+// display result 
 const displayResult = (data) =>{
     submitBtn.addEventListener('click', () => {
         let marks = 0;
@@ -82,3 +93,15 @@ const displayResult = (data) =>{
         });
     });
 };
+
+const questionToggler = () => testContainer.classList.toggle('d-none');
+
+const inputToggler = () => input.classList.toggle('d-none');
+
+const submitBtnToggler = () => submitBtn.classList.toggle('d-none');
+
+const clearData = () => {
+    questionToggler();
+    inputToggler();
+    testQuestions.innerHTML = '';
+}
