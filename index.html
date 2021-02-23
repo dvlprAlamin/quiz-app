@@ -32,11 +32,13 @@
     </section>
     <section id="test-container" class="d-none">
         <h1>Complete your test below</h1>
+        <div id="marks" class="d-none">
+            <h2>Your marks</h2>
+            <span id="marks-gain">0</span> Out of <span id="total-marks">0</span>
+            <h5 id="skip-message">You did not answer <span id="skip-question">0</span> questions.</h5>
+        </div>
         <div id="test-questions">
-            <div id="marks">
-                <h2>Your marks</h2>
-                <span id="marks-gain">0</span>/<span id="total-marks">0</span>
-            </div>
+
         </div>
         <button id="submit-btn" class="btn-design">Submit</button>
         <button id="back-btn" onclick="clearData()" class="btn-design d-none">Back</button>

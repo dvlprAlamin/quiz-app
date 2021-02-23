@@ -12,10 +12,6 @@ const input = document.getElementById('input');
 const testContainer = document.getElementById('test-container');
 const testQuestions = document.getElementById('test-questions');
 
-const marks = document.getElementById('marks');
-const marksGain = document.getElementById('marks-gain');
-const totalMarks = document.getElementById('total-marks');
-
 const updateCategory = () => {
     fetch('https://opentdb.com/api_category.php')
     .then(res => res.json())
@@ -38,7 +34,6 @@ const fetchQuestion = () => {
 
 startBtn.addEventListener('click', () => {
     inputToggler();
-    // displayToggler();
     fetchQuestion();
 });
 
@@ -58,18 +53,18 @@ const displayQuestion = (data) => {
                 <h3>${item.question}</h3>
             </div>
             <div class="options">
-                <input type='radio' id="${i}01" name='question${i}' value="${options[0]}">                  
-                <label for ="${i}01">${options[0]}</label>
-                <input type='radio' id="${i}02" name='question${i}' value="${options[1]}">
-                <label for ="${i}02">${options[1]}</label>
-                <input type='radio' id="${i}03" name='question${i}' value="${options[2]}">
-                <label for ="${i}03">${options[2]}</label>
-                <input type='radio' id="${i}04" name='question${i}' value="${options[3]}">
-                <label for ="${i}04">${options[3]}</label>
+                <input type='radio' id="o${i}01" name='question${i}'>                  
+                <label for ="o${i}01">${options[0]}</label>
+                <input type='radio' id="o${i}02" name='question${i}'>
+                <label for ="o${i}02">${options[1]}</label>
+                <input type='radio' id="o${i}03" name='question${i}'>
+                <label for ="o${i}03">${options[2]}</label>
+                <input type='radio' id="o${i}04" name='question${i}'>
+                <label for ="o${i}04">${options[3]}</label>
             </div>
         </div>
         `
-        // options.forEach((option, optNum) => document.querySelector(`#${i}o${optNum + 1}`).value = options[optNum])
+        options.forEach((op, optNum) => document.querySelector(`#o${i}0${optNum + 1}`).value = options[optNum])
     });
     // testQuestions.innerHTML +=`
     // <button id="back-btn" onclick="clearData()" class="btn-design">Back</button>
@@ -95,13 +90,17 @@ const displayResult = (data) =>{
             else{
                 givenAnswer.nextElementSibling.classList.add('wrong-answer');
                 const rightAnswer = document.querySelector(`[value="${question.correct_answer}"]`)
-                // this condition for ' sign issue
-                rightAnswer === null || rightAnswer.nextElementSibling.classList.add('right-answer')
+                rightAnswer.nextElementSibling.classList.add('right-answer')
             }
         });
-        marksGain.textContent = marks;
-        totalMarks.textContent = data.length;
-        console.log(marks,data.length);
+        const skipMsg = document.getElementById('skip-message');
+        notChecked === 0 ? skipMsg.style.display = 'none' : skipMsg.style.display = 'block';
+        document.getElementById('marks-gain').innerText = marks;
+        document.getElementById('total-marks').innerText = data.length;
+        document.getElementById('skip-question').innerText = notChecked;
+        document.getElementById('marks').classList.remove('d-none');
+        
+        
     });
 };
 
@@ -122,6 +121,7 @@ const clearData = () => {
     questionToggler();
     inputToggler();
     testQuestions.innerHTML = '';
+    document.getElementById('marks').classList.add('d-none');
 }
 
 backBtn.addEventListener('click', backBtnToggler)

@@ -131,6 +131,19 @@ input[type="radio"]:checked + label {
     background-color: green !important;
     color: #ffffff !important;
 }
+#marks{
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 1rem auto;
+    background-color: #717AEF;
+    color: #E4E6EB;
+    /* border: 2px solid #717AEF; */
+    padding:1rem 0;
+    border-radius: 5px;
+}
+#marks h5{
+    margin-top: 2rem;
+}
 .d-none{
     display: none !important;
 }
