@@ -17,16 +17,18 @@ const timeUp = document.querySelector('[timeUp]')
 const watchTime = document.querySelector('[watch-time]')
 
 
+// category part start
 const updateCategory = () => {
     fetch('https://opentdb.com/api_category.php')
-    .then(res => res.json())
-    .then(data => setCategory(data.trivia_categories))
+        .then(res => res.json())
+        .then(data => setCategory(data.trivia_categories))
 }
 updateCategory();
 
 const setCategory = (data) => data.forEach(category => categories.innerHTML += `<option value='${category.id}'>${category.name}</option>`);
+// category part end
 
-// set time 
+// set time to watch
 const setTimer = () => {
     const totalSeconds = questionCount.value * 30;
     minutes.innerText = Math.floor(totalSeconds / 60);
@@ -36,9 +38,9 @@ const setTimer = () => {
     watchTime.classList.remove('d-none');
 }
 
-// unit resetter
+// unit resetter for watch
 const resetUnit = (unit, limit, after) => unit.innerText === limit && ((unit.innerText = after) && unit.previousElementSibling.innerText--);
-// two digit updater
+// two digit updater for watch
 const isTwoDigit = unit => unit.innerText.length === 1 && (unit.innerText = '0' + unit.innerText);
 
 
@@ -46,36 +48,37 @@ const isTwoDigit = unit => unit.innerText.length === 1 && (unit.innerText = '0' 
 const fetchQuestion = () => {
     const url = `https://opentdb.com/api.php?amount=${questionCount.value}&category=${category.value}&difficulty=${difficulty.value}&type=multiple`
     fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        displayQuestion(data.results);
-        displayResult(data.results);
-    })
+        .then(res => res.json())
+        .then(data => {
+            displayQuestion(data.results);
+            displayResult(data.results);
+        })
 }
 
-startBtn.addEventListener('click', (e) => {
-    // if(questionCount.value < 5){
-    //     alert('enter at least 5 for quiz test')
-    //     return;
-    // }
+// start button event handler
+startBtn.addEventListener('click', () => {
+    if (questionCount.value < 5) {
+        alert('Enter at least 5 for quiz test')
+        return;
+    }
     inputToggler();
     fetchQuestion();
     setTimer();
     watch.classList.remove('d-none');
     const interval = setInterval(() => {
-        if(seconds.innerText === '30' && minutes.innerText === '00'){
+        if (seconds.innerText === '30' && minutes.innerText === '00') {
             watchTime.classList.add('end-soon');
         }
-        if(seconds.innerText === '00' && minutes.innerText === '00'){
+        if (seconds.innerText === '00' && minutes.innerText === '00') {
             timeUp.classList.remove('d-none');
             watchTime.classList.add('d-none');
-            clearInterval(ee);
+            clearInterval(interval);
             submitBtn.click();
         }
         centiSeconds.innerText++;
-        resetUnit(centiSeconds,'100', '00')
-        resetUnit(seconds,'-1', '59')
-        resetUnit(minutes,'-1', '59')
+        resetUnit(centiSeconds, '100', '00')
+        resetUnit(seconds, '-1', '59')
+        resetUnit(minutes, '-1', '59')
         isTwoDigit(centiSeconds);
         isTwoDigit(seconds);
         isTwoDigit(minutes);
@@ -85,7 +88,7 @@ startBtn.addEventListener('click', (e) => {
 
 
 // display Questions
-const displayQuestion = (data) => {
+const displayQuestion = data => {
     questionToggler();
     data.forEach((item, i) => {
         i++;
@@ -115,21 +118,21 @@ const displayQuestion = (data) => {
 };
 
 // display result 
-const displayResult = (data) =>{
+const displayResult = (data) => {
     submitBtn.addEventListener('click', () => {
         submitBtnToggler();
         let marks = 0;
         let notChecked = 0;
         data.forEach((question, i) => {
-            const givenAnswer = document.querySelector(`input[name="question${i+1}"]:checked`);
-            if(givenAnswer === null){
+            const givenAnswer = document.querySelector(`input[name="question${i + 1}"]:checked`);
+            if (givenAnswer === null) {
                 notChecked++;
             }
-            else if(question.correct_answer === givenAnswer.value){
+            else if (question.correct_answer === givenAnswer.value) {
                 marks++;
                 givenAnswer.nextElementSibling.classList.add('right-answer')
             }
-            else{
+            else {
                 givenAnswer.nextElementSibling.classList.add('wrong-answer');
                 const rightAnswer = document.querySelector(`[value="${question.correct_answer}"]`)
                 rightAnswer.nextElementSibling.classList.add('right-answer')
@@ -141,13 +144,11 @@ const displayResult = (data) =>{
         document.getElementById('total-marks').innerText = data.length;
         document.getElementById('skip-question').innerText = notChecked;
         document.getElementById('marks').classList.remove('d-none');
-        
-        
     });
 };
 
+// toggler function
 const questionToggler = () => testContainer.classList.toggle('d-none');
-
 const inputToggler = () => input.classList.toggle('d-none');
 
 const submitBtnToggler = () => {
@@ -159,6 +160,8 @@ const backBtnToggler = () => {
     backBtn.classList.add('d-none');
 }
 
+
+// clear all with back button
 const clearData = () => {
     questionToggler();
     inputToggler();
@@ -167,5 +170,5 @@ const clearData = () => {
     watch.classList.add('d-none');
     watchTime.classList.remove('end-soon');
 }
-backBtn.addEventListener('click', backBtnToggler)
+backBtn.addEventListener('click', backBtnToggler);
 
