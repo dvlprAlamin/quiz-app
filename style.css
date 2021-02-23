@@ -123,3 +123,19 @@ input[type="radio"]:checked + label {
   /* margin: 1rem 0; */
   text-align: center;
 }
+.wrong-answer{
+    background-color: red !important;
+    color: #ffffff !important;
+}
+.right-answer{
+    background-color: green !important;
+    color: #ffffff !important;
+}
+
+
+
+@media (max-width: 600px){
+    .options{
+        grid-template-columns: 1fr;
+    }
+}
