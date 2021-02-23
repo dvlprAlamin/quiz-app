@@ -24,7 +24,6 @@ const fetchQuestion = () => {
     .then(res => res.json())
     .then(data => {
         displayQuestion(data.results);
-        // localStorage.setItem('data',JSON.stringify(data.results));
         displayResult(data.results);
     })
 }
@@ -36,15 +35,9 @@ const displayQuestion = (data) => {
 
     data.forEach((item, i) => {
         i++;
-        // const updateResult = () => {
-            // const answer = document.querySelector('input[type="radio"]:checked');
-            // console.log(answer.value,item.correct_answer);
-        // }
-
-        // const options = item.incorrect_answers;
-        // const random = Math.floor(Math.random() * 4);
-        // options.splice(random, 0, item.correct_answer);
-        // console.log(options);
+        const options = item.incorrect_answers;
+        const random = Math.floor(Math.random() * 4);
+        options.splice(random, 0, item.correct_answer);
         testQuestions.innerHTML += `
         <div class="single-question">
             <div class="question">
@@ -52,30 +45,23 @@ const displayQuestion = (data) => {
                 <h3>${item.question}</h3>
             </div>
             <div class="options">
-                <input type='radio' id="${i}01" name='question${i}' value="${item.correct_answer}">                  
-                <label for ="${i}01">${item.correct_answer}</label>
-                <input type='radio' id="${i}02" name='question${i}' value="${item.incorrect_answers[0]}">
-                <label for ="${i}02">${item.incorrect_answers[0]}</label>
-                <input type='radio' id="${i}03" name='question${i}' value="${item.incorrect_answers[1]}">
-                <label for ="${i}03">${item.incorrect_answers[1]}</label>
-                <input type='radio' id="${i}04" name='question${i}' value="${item.incorrect_answers[2]}">
-                <label for ="${i}04">${item.incorrect_answers[2]}</label>
+                <input type='radio' id="${i}01" name='question${i}' value="${options[0]}">                  
+                <label for ="${i}01">${options[0]}</label>
+                <input type='radio' id="${i}02" name='question${i}' value="${options[1]}">
+                <label for ="${i}02">${options[1]}</label>
+                <input type='radio' id="${i}03" name='question${i}' value="${options[2]}">
+                <label for ="${i}03">${options[2]}</label>
+                <input type='radio' id="${i}04" name='question${i}' value="${options[3]}">
+                <label for ="${i}04">${options[3]}</label>
             </div>
         </div>
         `
-
     });
-}
+};
 
 
 const displayResult = (data) =>{
-        // const data = JSON.parse(localStorage.getItem('data'))
-        // console.log(data);
-       
-            // const givenAnswer = givenAnswerList[i]
-            // console.log(question.correct_answer,givenAnswer);
-        submitBtn.addEventListener('click', () => {
-
+    submitBtn.addEventListener('click', () => {
         let marks = 0;
         let notChecked = 0;
         data.forEach((question, i) => {
@@ -90,26 +76,9 @@ const displayResult = (data) =>{
             else{
                 givenAnswer.nextElementSibling.classList.add('wrong-answer');
                 const rightAnswer = document.querySelector(`[value="${question.correct_answer}"]`)
-                // for ' sign issue
-                rightAnswer.nextElementSibling === null || rightAnswer.nextElementSibling.classList.add('right-answer')
+                // this condition for ' sign issue
+                rightAnswer === null || rightAnswer.nextElementSibling.classList.add('right-answer')
             }
-
-            // console.log(question.correct_answer,givenAnswer.value);
         });
-        console.log(marks);
-        // const answer = document.querySelector('input[type="radio"]:checked');
-        // answer.forEach(ans => {
-        //     if(ans.value === item.correct_answer){
-        //         // ans.nextElementSibling.classList.add('d-none');
-        //         console.log('right');
-        //     }
-        //     else{
-        //         console.log('wrong');
-        //     }
-        //     // console.log(ans.value,item.correct_answer);
-        // });
-})
-}
-
-
-// submitBtn.addEventListener('click', displayResult);
+    });
+};
