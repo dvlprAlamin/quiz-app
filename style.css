@@ -6,6 +6,7 @@
 body {
   background: #e4e6eb;
   font-family: "Montserrat", sans-serif;
+  position: relative;
 }
 
 h1 {
@@ -170,14 +171,28 @@ input[type="radio"]:checked + label {
   animation: zoom 1.5s alternate infinite ease-in;
 }
 @keyframes zoom {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1.2);
-  }
+  0% {transform: scale(0.8)}
+  100% {transform: scale(1.2)}
+}
+/* loading spinner */
+#loader {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 40vh;
+    left:50%;
+    margin-left: -35px;
+    border: 3px solid #fff;
+    border-top: 3px solid #717aef;
+    border-radius: 100%;
+    animation: loading 1s infinite ease;
+    z-index:5;
 }
 
+@keyframes loading {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+}
 /* responsive part */
 @media (max-width: 800px) {
   #watch {

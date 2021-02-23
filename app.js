@@ -16,6 +16,7 @@ const watch = document.getElementById('watch');
 const timeUp = document.querySelector('[timeUp]')
 const watchTime = document.querySelector('[watch-time]')
 
+const loader = document.getElementById('loader');
 
 // category part start
 const updateCategory = () => {
@@ -57,6 +58,7 @@ const fetchQuestion = () => {
 
 // start button event handler
 startBtn.addEventListener('click', () => {
+    loader.classList.remove('d-none')
     if (questionCount.value < 5) {
         alert('Enter at least 5 for quiz test')
         return;
@@ -115,6 +117,7 @@ const displayQuestion = data => {
         `
         options.forEach((op, optNum) => document.querySelector(`#o${i}0${optNum + 1}`).value = options[optNum])
     });
+    loader.classList.add('d-none')
 };
 
 // display result 
