@@ -1,11 +1,7 @@
-// https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple
 
-
-// https://opentdb.com/api_category.php
 const categories = document.getElementById('category');
 const questionCount = document.querySelector('[name="question-count"]');
 const difficulty = document.querySelector('[name="difficulty"]');
-// const type = document.querySelector('[name="type"]');
 const category = document.querySelector('[name="category"]');
 
 const startBtn = document.getElementById('start-btn');
@@ -21,13 +17,15 @@ updateCategory();
 
 const setCategory = (data) => data.forEach(category => categories.innerHTML += `<option value='${category.id}'>${category.name}</option>`);
 
+// fetch questions
 const fetchQuestion = () => {
     const url = `https://opentdb.com/api.php?amount=${questionCount.value}&category=${category.value}&difficulty=${difficulty.value}&type=multiple`
     fetch(url)
     .then(res => res.json())
     .then(data => {
         displayQuestion(data.results);
-        localStorage.setItem('data',JSON.stringify(data.results));
+        // localStorage.setItem('data',JSON.stringify(data.results));
+        displayResult(data.results);
     })
 }
 
@@ -70,14 +68,16 @@ const displayQuestion = (data) => {
 }
 
 
-const displayResult = () => {
-        const data = JSON.parse(localStorage.getItem('data'))
+const displayResult = (data) =>{
+        // const data = JSON.parse(localStorage.getItem('data'))
         // console.log(data);
        
             // const givenAnswer = givenAnswerList[i]
             // console.log(question.correct_answer,givenAnswer);
+        submitBtn.addEventListener('click', () => {
+
         let marks = 0;
-        let notChecked = 0
+        let notChecked = 0;
         data.forEach((question, i) => {
             const givenAnswer = document.querySelector(`input[name="question${i+1}"]:checked`);
             if(givenAnswer === null){
@@ -108,7 +108,8 @@ const displayResult = () => {
         //     }
         //     // console.log(ans.value,item.correct_answer);
         // });
+})
 }
 
 
-submitBtn.addEventListener('click', displayResult);
+// submitBtn.addEventListener('click', displayResult);
