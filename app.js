@@ -90,7 +90,8 @@ const displayResult = () => {
             else{
                 givenAnswer.nextElementSibling.classList.add('wrong-answer');
                 const rightAnswer = document.querySelector(`[value="${question.correct_answer}"]`)
-                rightAnswer.nextElementSibling.classList.add('right-answer')
+                // for ' sign issue
+                rightAnswer.nextElementSibling === null || rightAnswer.nextElementSibling.classList.add('right-answer')
             }
 
             // console.log(question.correct_answer,givenAnswer.value);
