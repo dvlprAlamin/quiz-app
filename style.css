@@ -147,6 +147,19 @@ input[type="radio"]:checked + label {
 .d-none {
   display: none !important;
 }
+#warning{
+  max-width: 400px;
+  text-align: center;
+  color: red;
+  border: 2px solid red;
+  position: absolute;
+  padding:.5rem 1rem;
+  border-radius: 25px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 75vh;
+}
 
 /* watch part css */
 #watch {
